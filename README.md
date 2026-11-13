@@ -16,6 +16,7 @@ GOG.com で販売されている版を対象に、第1作から順に日本語�
 |---|---|---|
 | ランズ・オブ・ロア（Lands of Lore: The Throne of Chaos） | 公開中 | [LandsOfLore_JP.zip](https://github.com/higesho/lol-ja/releases/tag/lol1-v1.0) |
 | ランズ・オブ・ロア2（Lands of Lore: Guardians of Destiny） | 公開中 | [LandsOfLore2_JP.zip](https://github.com/higesho/lol-ja/releases/tag/lol2-v1.0) |
+| ランズ・オブ・ロア3（Lands of Lore III） | 公開中 | [LandsOfLore3_JP.zip](https://github.com/higesho/lol-ja/releases/tag/lol3-v1.0) |
 
 入れ方と外し方は、サイトの各作品のページをご覧ください。
 どのMODも、ゲームのファイルを書き換えません。配布物には原作のプログラムやデータは入っていません。
@@ -26,6 +27,6 @@ GOG.com で販売されている版を対象に、第1作から順に日本語�
 
 ## クレジット・権利
 
-- 東雲フォント（第2作）: パブリックドメインのフォントです。
+- 東雲フォント（第2作・第3作）: パブリックドメインのフォントです。
 - 美咲フォント: Copyright (C) 2002-2021 Num Kadoma。自由に利用・複製・再配布できるフリーソフトウエアです。
 - Lands of Lore は Electronic Arts Inc. の商標です。ゲームの画像・文章の権利は原作の権利者にあります。
