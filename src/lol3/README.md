@@ -2,7 +2,7 @@
 
 GOG 版 Lands of Lore III 用の `winmm.dll`（ゲームのフォルダに置くと文を日本語にし、会話と動画に字幕を出す）と、そのデータを作る道具です。
 
-- `dll/` … winmm.dll の本体。`build.bat`（Visual Studio の x86 の cl）で組み立てます。`build_all.bat` は試験用の DLL と `test_build.exe` も作ります
+- `dll/` … winmm.dll の本体。`build.bat`（Visual Studio の x86 の cl）で組み立てます。`build.bat test` で試験版（`build/test/winmm.dll`、配布しない）を作ります。`build_all.bat` は配布版・試験版と `test_build.exe` をまとめて作ります
 - `tools/wsx.py` / `tools/trr.py` … ゲームの書庫 .wsx と文の表 .trr を読み書きする
 - `tools/extract.py` … 英文を `translation/en/text.tsv` に抜き出す
 - `tools/check_ja.py` / `tools/build_text.py` / `tools/build_dat.py` … 訳を検査し、`out/LOL3JP/LOL3_JA.DAT` を作る

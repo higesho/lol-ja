@@ -7,7 +7,9 @@ char g_dir[MAX_PATH];
 int g_nopatch;
 int g_reload;
 static HMODULE g_winmm;
+#ifdef LOLJP_TEST
 static int g_log;
+#endif
 static int g_active;
 
 /* ---------- winmm の転送 ---------- */
@@ -29,9 +31,10 @@ static void LoadWinmm(void)
 #define THUNK(n) __declspec(naked) void ex_##n(void) { __asm { jmp dword ptr [p_##n] } }
 WINMM_FUNCS(THUNK)
 
-/* ---------- 記録 ---------- */
+/* ---------- 記録（試験版 build.bat test だけ。配布版では何もしない） ---------- */
 void LogF(const char *fmt, ...)
 {
+#ifdef LOLJP_TEST
     char buf[1024], path[MAX_PATH];
     va_list ap;
     FILE *f;
@@ -43,6 +46,9 @@ void LogF(const char *fmt, ...)
     wsprintfA(path, "%s\\loljp.log", g_dir);
     f = fopen(path, "a");
     if (f) { fputs(buf, f); fputc('\n', f); fclose(f); }
+#else
+    (void)fmt;
+#endif
 }
 
 /* ---------- コールバックの割り当て ---------- */
@@ -129,10 +135,13 @@ static void Init(HMODULE self)
     s = strrchr(g_dir, '\\'); if (s) *s = 0;
     lstrcatA(g_dir, "\\LOLJP");
     wsprintfA(ini, "%s\\loljp.ini", g_dir);
+#ifdef LOLJP_TEST
+    /* 試験用の切り替え（loljp.ini の [Debug]）。配布版では読まず、どれも 0 のまま */
     g_log = GetPrivateProfileIntA("Debug", "Log", 0, ini);
     g_nopatch = GetPrivateProfileIntA("Debug", "NoPatch", 0, ini);
     g_trace = GetPrivateProfileIntA("Debug", "TraceText", 0, ini);
     g_reload = GetPrivateProfileIntA("Debug", "Reload", 0, ini);
+#endif
     if (GetPrivateProfileIntA("Main", "Enable", 1, ini) == 0) return;
     if (!CheckHost()) { LogF("DOSBox が想定と違うので何もしない"); return; }
     {
@@ -144,7 +153,9 @@ static void Init(HMODULE self)
     }
     InstallHook();
     g_active = 1;
+#ifdef LOLJP_TEST
     if (GetPrivateProfileIntA("Debug", "Test", 0, ini)) TestCtl_Start();
+#endif
     LogF("loljp: 差し込み完了");
 }
 

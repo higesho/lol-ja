@@ -50,13 +50,18 @@ typedef uint8_t u8; typedef uint16_t u16; typedef uint32_t u32; typedef int32_t 
 #define D_XLAT           0x00196680u
 
 /* ===================== ログ ===================== */
+/* ログは試験版（build.bat test）だけ。配布版では logfp は開かず、LOG は何もしない */
 static FILE *logfp;
 static void LOG(const char *fmt, ...)
 {
+#ifdef LOL2JP_TEST
     va_list ap;
     if (!logfp) return;
     va_start(ap, fmt); vfprintf(logfp, fmt, ap); va_end(ap);
     fputc('\n', logfp); fflush(logfp);
+#else
+    (void)fmt;
+#endif
 }
 
 /* ===================== データ（リソースに埋め込み） ===================== */
@@ -921,6 +926,8 @@ static void load_blob(HMODULE self)
 
 static void install(HMODULE self)
 {
+#ifdef LOL2JP_TEST
+    /* 試験用: lol2jp_debug.txt があればログを書く */
     char path[MAX_PATH], *q;
     GetModuleFileNameA(self, path, MAX_PATH);
     q = strrchr(path, '\\');
@@ -931,6 +938,7 @@ static void install(HMODULE self)
             logfp = fopen(path, "w");
         }
     }
+#endif
     if (!check_dosbox()) { LOG("DOSBox の版が違うので何もしない"); return; }
     load_blob(self);
     LOG("データ %u バイト、字幕 %u 件", blobsize, sub_nent);
@@ -961,7 +969,7 @@ static void load_winmm(void)
 #define THUNK(n) __declspec(naked) void ex_##n(void) { __asm { jmp dword ptr [p_##n] } }
 WINMM_FUNCS(THUNK)
 
-#ifdef TESTCTL
+#ifdef LOL2JP_TEST
 #include "testctl.inc"
 #endif
 
@@ -972,7 +980,7 @@ BOOL WINAPI DllMain(HINSTANCE h, DWORD reason, LPVOID r)
         DisableThreadLibraryCalls(h);
         load_winmm();
         install(h);
-#ifdef TESTCTL
+#ifdef LOL2JP_TEST
         ctl_start();
 #endif
     }

@@ -2,7 +2,7 @@
 
 GOG 版 Lands of Lore（DOS・CD 版）用の `DOSBOX\winmm.dll`（DOSBox の中のゲームを書き換えて日本語を描く）と、そのデータを作る道具です。
 
-- `dll/` … winmm.dll の本体。`build.bat`（Visual Studio の x86 の cl）で `dll/out/winmm.dll` ができます
+- `dll/` … winmm.dll の本体。`build.bat`（Visual Studio の x86 の cl）で `dll/out/winmm.dll` ができます。`build.bat test` で作る試験版（`build/test/winmm.dll`、試験用の操作口 `testctl.c` とログ入り）は配布しません
 - `tools/gen_winmm.py` … Windows の winmm.dll から転送の表（`winmm.def`・`winmm_exports.h`）を作る
 - `tools/gen_patterns.py` … LANDS.EXE から照合用の命令列の表（`patterns.h`）を作る
 - `tools/pak.py` … ゲームの PAK を `orig/pak/` に展開する

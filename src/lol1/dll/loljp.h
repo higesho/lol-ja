@@ -47,8 +47,10 @@ void Game_OnExec(void);
 uint32_t Game_Int21(CB_Handler orig);
 void Game_Tick(void);
 
-/* testctl.c */
+/* testctl.c（試験版 build.bat test だけ） */
+#ifdef LOLJP_TEST
 void TestCtl_Start(void);
+#endif
 
 /* text.c */
 int  Text_Load(const char *path);

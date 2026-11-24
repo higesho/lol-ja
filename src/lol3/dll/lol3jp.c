@@ -248,7 +248,7 @@ static int __cdecl my_print(void *vpv, const char *str, int x, int y, int fg, in
     char tmp[1024];
     if (!s || !g_njf) return o_print(vpv, str, x, y, fg, bg);
     /* 持ち越しの続き */
-#ifdef TESTCTL
+#ifdef LOL3JP_TEST
     if (s[0] && !s[1]) { static int nl1; if (nl1 < 600) { nl1++; LOG("1字 %02x ←%p ←%08x", s[0], _ReturnAddress(), *(u32 *)((char *)_AddressOfReturnAddress() + 36)); } }
 #endif
     if (g_pend) {
@@ -263,7 +263,7 @@ static int __cdecl my_print(void *vpv, const char *str, int x, int y, int fg, in
         }
     }
     if (!has_jp((const char *)s)) return o_print(vpv, (const char *)s, x, y, fg, bg);
-#ifdef TESTCTL
+#ifdef LOL3JP_TEST
     {   /* 試験: 描く文字列を一度ずつ記録 */
         static u32 seen[512]; static int nseen;
         u32 h = 2166136261u; int k; const u8 *q = s; char hx[400]; int n = 0;
@@ -542,7 +542,7 @@ static void *patch_iat(HMODULE m, const char *dll, const char *fn, void *to)
 
 #include "subs.inc"
 
-#ifdef TESTCTL
+#ifdef LOL3JP_TEST
 #include "testctl.inc"
 #include "drawtest.inc"
 #endif
@@ -553,7 +553,7 @@ static FARPROC WINAPI my_gpa(HMODULE m, LPCSTR n)
 {
     FARPROC p = o_gpa(m, n);
     if ((u32)n > 0xffff && p) {
-#ifdef TESTCTL
+#ifdef LOL3JP_TEST
         p = glide_wrap(n, p);   /* 字幕を描いた後の画面を撮る */
 #endif
         p = sub_glide_wrap(n, p);
@@ -590,7 +590,7 @@ static void install(HINSTANCE h)
     wsprintfA(ini, "%s\\lol3jp.ini", g_dir);
     if (!GetPrivateProfileIntA("LOL3JP", "Enable", 1, ini)) return;
     g_logon = GetPrivateProfileIntA("LOL3JP", "Log", 0, ini);
-#ifdef TESTCTL
+#ifdef LOL3JP_TEST
     g_logon = 1;
 #endif
     if (memcmp((void *)A_BUFFER_PRINT, sig_print, 6) || memcmp((void *)A_STR_WIDTH, sig_strw, 6) ||
@@ -619,7 +619,7 @@ static void install(HINSTANCE h)
     o_cfa = (cfa_fn)patch_iat(m, "KERNEL32.dll", "CreateFileA", my_cfa);
     o_gpa = (gpa_fn)patch_iat(m, "KERNEL32.dll", "GetProcAddress", my_gpa);
     LOG("取り付け完了 字体 %d 種、訳 %d ファイル", g_njf, g_ntrr);
-#ifdef TESTCTL
+#ifdef LOL3JP_TEST
     {
         char t[2 * MAX_PATH];
         if (GetEnvironmentVariableA("LOL3JP_DRAWTEST", t, sizeof t)) {

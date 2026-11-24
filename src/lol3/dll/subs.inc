@@ -53,14 +53,14 @@ static void sub_check(const u8 *p, u32 len, int whole)
     } __except (EXCEPTION_EXECUTE_HANDLER) { return; }
     for (i = 0; i < g_nsub; i++) {
         if ((whole ? g_sub[i].ha : g_sub[i].hb) == h) {
-#ifdef TESTCTL
+#ifdef LOL3JP_TEST
             LOG("声 %s len=%u h=%08x → 行 %d", whole ? "set" : "load", len, h, g_sub[i].idx);
 #endif
             sub_trigger(g_sub[i].idx, g_sub[i].ms);
             return;
         }
     }
-#ifdef TESTCTL
+#ifdef LOL3JP_TEST
     if (whole) {
         static int ns; char hx[200]; int k, n = 0;
         if (ns++ < 60) {

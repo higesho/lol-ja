@@ -14,9 +14,9 @@ GOG.com で販売されている版を対象に、第1作から順に日本語�
 
 | 作品 | 状態 | ダウンロード |
 |---|---|---|
-| ランズ・オブ・ロア（Lands of Lore: The Throne of Chaos） | 公開中 | [LandsOfLore_JP.zip](https://github.com/higesho/lol-ja/releases/tag/lol1-v1.0) |
-| ランズ・オブ・ロア2（Lands of Lore: Guardians of Destiny） | 公開中 | [LandsOfLore2_JP.zip](https://github.com/higesho/lol-ja/releases/tag/lol2-v1.0) |
-| ランズ・オブ・ロア3（Lands of Lore III） | 公開中 | [LandsOfLore3_JP.zip](https://github.com/higesho/lol-ja/releases/tag/lol3-v1.0) |
+| ランズ・オブ・ロア（Lands of Lore: The Throne of Chaos） | 公開中 | [LandsOfLore_JP.zip](https://github.com/higesho/lol-ja/releases/tag/lol1-v1.1) |
+| ランズ・オブ・ロア2（Lands of Lore: Guardians of Destiny） | 公開中 | [LandsOfLore2_JP.zip](https://github.com/higesho/lol-ja/releases/tag/lol2-v1.1) |
+| ランズ・オブ・ロア3（Lands of Lore III） | 公開中 | [LandsOfLore3_JP.zip](https://github.com/higesho/lol-ja/releases/tag/lol3-v1.1) |
 
 入れ方と外し方は、サイトの各作品のページをご覧ください。
 どのMODも、ゲームのファイルを書き換えません。配布物には原作のプログラムやデータは入っていません。
